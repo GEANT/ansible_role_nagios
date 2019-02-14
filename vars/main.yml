@@ -1,0 +1,6 @@
+---
+# vars file for ansible_role_nagios
+nagios_packages:
+  - nagios3
+  - libxml-xpath-perl
+  - libhttp-cache-transparent-perl

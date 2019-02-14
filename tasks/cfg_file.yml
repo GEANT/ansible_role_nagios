@@ -1,0 +1,10 @@
+---
+- name: Ensure {{ nagios_cfg_dir }}/{{ cfg_file }}.cfg is available
+  ini_file:
+    path: "{{ nagios_cfg_dir }}/{{ cfg_file }}.cfg"
+    section: null
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
+    no_extra_spaces: true
+  with_dict: "{{ nagios_cfg[cfg_file] }}"
+  notify: restart_nagios

@@ -1,0 +1,7 @@
+---
+# defaults file for ansible_role_nagios
+nagios_cfg_dir: /etc/nagios3
+nagios_user: nagios
+nagios_custom_checks_dir: /opt/custom_checks
+nagios_pubkeys: []
+nagios_cgi_conf: []
