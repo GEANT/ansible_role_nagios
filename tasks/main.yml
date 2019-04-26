@@ -65,6 +65,14 @@
     loop_var: cfg_file
   when: nagios_cfg is defined
 
+# We do this ourselves
+- name: Ensure default localhost nagios configuration file is not available
+  file:
+    dest: "{{ nagios_cfg_dir }}/conf.d/localhost_nagios2.cfg"
+    state: absent
+  tags: template,nagios
+  notify: reload_nagios
+
 # Custom services, hosts, hostgroups, etc go here
 - name: Ensure all-in-one custom configuration is available
   template:
