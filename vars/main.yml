@@ -4,3 +4,4 @@ nagios_packages:
   - nagios3
   - libxml-xpath-perl
   - libhttp-cache-transparent-perl
+  - pynag
