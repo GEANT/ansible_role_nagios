@@ -7,4 +7,5 @@
     value: "{{ item.value }}"
     no_extra_spaces: true
   with_dict: "{{ nagios_cfg[cfg_file] }}"
+  tags: template,nagios
   notify: restart_nagios

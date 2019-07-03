@@ -64,6 +64,7 @@
   loop_control:
     loop_var: cfg_file
   when: nagios_cfg is defined
+  tags: template,nagios
 
 # We do this ourselves
 - name: Ensure default localhost nagios configuration file is not available
