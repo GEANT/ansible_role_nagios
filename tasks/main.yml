@@ -9,44 +9,6 @@
     state: present
   tags: pkgs,nagios
 
-#- name: Ensure {{ nagios_user }} account is configured
-#  user:
-#    name: "{{ nagios_user }}"
-#    shell: /bin/bash
-#    #  groups: www-data
-#  tags: user,nagios
-
-#- name: Ensure SSH public keys are available to the {{ nagios_user }} user
-#  authorized_key:
-#    user: "{{ nagios_user }}"
-#    state: present
-#    exclusive: true
-#    key: "{{ nagios_pubkeys|sort|join('\n') }}"
-#  tags: user
-#  when: nagios_pubkeys
-
-## This key will be used to sign in to remote hosts and run checks
-#- name: Ensure SSH private key is available to the {{ nagios_user }} user
-#  become: true
-#  become_user: "{{ nagios_user }}"
-#  copy:
-#    content: "{{ nagios_privkey }}"
-#    dest: ~/.ssh/id_rsa
-#    mode: 0400
-#  tags: user
-#  when: nagios_privkey is defined
-
-#- name: Ensure SSH configuration is available to the {{ nagios_user }} user
-#  become: true
-#  become_user: "{{ nagios_user }}"
-#  template:
-#    src: "{{ item }}"
-#    dest: ~/.ssh/config
-#  with_first_found:
-#      - nagios_sshconf.j2
-#      - _nagios_sshconf.j2
-#  tags: ssh
-
 - name: Ensure custom checks directory is available
   file:
     path: "{{ nagios_custom_checks_dir }}"
