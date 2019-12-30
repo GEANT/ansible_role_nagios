@@ -23,7 +23,7 @@
   with_items: "{{ nagios_checks_repos }}"
   when: nagios_checks_repos is defined
 
-# Configure various server configurtion files
+# Configure various server configuration files
 - include_tasks: cfg_file.yml
   with_items: "{{ nagios_cfg }}"
   loop_control:
@@ -31,23 +31,20 @@
   when: nagios_cfg is defined
   tags: template,nagios
 
-# We do this ourselves
-- name: Ensure default localhost nagios configuration file is not available
-  file:
-    dest: "{{ nagios_cfg_dir }}/conf.d/localhost_nagios2.cfg"
-    state: absent
+# We will managed this ourselves
+- name: Ensure default localhost nagios configuration file is empty
+  copy:
+    dest: "{{ nagios_cfg_dir }}/objects/localhost.cfg"
+    content: ""
   tags: template,nagios
   notify: reload_nagios
 
 # Custom services, hosts, hostgroups, etc go here
 - name: Ensure all-in-one custom configuration is available
   template:
-    src: "{{ item }}"
+    src: "{{ nagios_localconf_src }}"
     dest: "{{ nagios_cfg_dir }}/conf.d/local.cfg"
   tags: template,nagios
-  with_first_found:
-    - nagios_localconf.j2
-    - _nagios_localconf.j2
   notify: reload_nagios
 
 - name: Ensure permission on Nagios pipe directory are correct

@@ -5,3 +5,4 @@ nagios_user: nagios
 nagios_custom_checks_dir: /opt/custom_checks
 nagios_pubkeys: []
 nagios_cgi_conf: []
+nagios_localconf_src: nagios_local.cfg.j2
