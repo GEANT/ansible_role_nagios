@@ -1,0 +1,7 @@
+---
+nagios_packages:
+  - git
+  - "{{ _nagios }}"
+  - libxml-xpath-perl
+  - libhttp-cache-transparent-perl
+  - pynag
