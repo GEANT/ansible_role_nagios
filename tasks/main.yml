@@ -60,3 +60,14 @@
     state: directory
     mode: '2710'
   notify: reload_nagios
+
+- name: Ensure shell script is available to force a check of all services
+  template:
+    src: force_checks.sh.j2
+    dest: /root/force_checks.sh
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: Force a check of all services
+  shell: /root/force_checks.sh

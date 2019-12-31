@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# {{ ansible_managed }}
+# Script to force checking of all services on all hosts
+{% for instance in _ei.instances %}
+printf "[%lu] SCHEDULE_FORCED_HOST_SVC_CHECKS;{{ instance.tags.SystemLabel }};`date +%s`\n" `date +%s` > /var/lib/{{ _nagios }}/rw/nagios.cmd
+{% endfor %}
