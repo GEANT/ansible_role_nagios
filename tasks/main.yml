@@ -69,5 +69,7 @@
     owner: root
     group: root
 
+- meta: flush_handlers
+
 - name: Force a check of all services
   shell: /root/force_checks.sh
