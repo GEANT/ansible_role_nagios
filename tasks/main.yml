@@ -65,7 +65,7 @@
     mode: '2710'
   notify: reload_nagios
 
-- name: Ensure shell script is available to force a check of all services
+- name: Ensure python script is available to force check all services
   template:
     src: nagios_force_checks.py.j2
     dest: /root/nagios_force_checks.py
