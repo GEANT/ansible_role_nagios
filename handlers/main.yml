@@ -1,11 +1,20 @@
 ---
 # handlers file for ansible_role_nagios
-- name: reload_nagios
+- name: Reload nagios service
   service:
     name: "{{ _nagios }}"
     state: reloaded
+  listen: reload_nagios
 
-- name: restart_nagios
+- name: Restart nagios service
   service:
     name: "{{ _nagios }}"
     state: restarted
+  listen: restart_nagios
+
+- name: Force service checks
+  command: /root/nagios_force_checks.py
+  listen:
+    - reload_nagios
+    - restart_nagios
+    - force_checks

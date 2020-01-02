@@ -1,7 +1,7 @@
 ---
 nagios_packages:
+  - python3
   - git
   - "{{ _nagios }}"
   - libxml-xpath-perl
   - libhttp-cache-transparent-perl
-  - pynag

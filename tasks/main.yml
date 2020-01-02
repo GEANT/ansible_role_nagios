@@ -9,6 +9,10 @@
     state: present
   tags: pkgs,nagios
 
+- name: Ensure pynag is available
+  pip:
+    name: pynag
+
 - name: Ensure custom checks directory is available
   file:
     path: "{{ nagios_custom_checks_dir }}"
@@ -63,13 +67,9 @@
 
 - name: Ensure shell script is available to force a check of all services
   template:
-    src: force_checks.sh.j2
-    dest: /root/force_checks.sh
+    src: nagios_force_checks.py.j2
+    dest: /root/nagios_force_checks.py
     mode: '0755'
     owner: root
     group: root
-
-- meta: flush_handlers
-
-- name: Force a check of all services
-  shell: /root/force_checks.sh
+  notify: force_checks

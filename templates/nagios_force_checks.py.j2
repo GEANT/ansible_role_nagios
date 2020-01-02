@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+# Script to force a check of all services on all hosts.
+import time
+from pynag import Model
+from pynag import Control
+
+Model.cfg_file = '{{ nagios_cfg_dir }}/nagios.cfg'
+
+for i in Model.Host.objects.all:
+    if i.host_name is not None:
+        epoch = int(time.time())
+        Control.Command.schedule_forced_host_svc_checks(
+                host_name = i.host_name,
+                check_time = epoch,
+                timestamp=epoch
+                )
