@@ -54,8 +54,9 @@
   git:
     repo: "{{ item.repo }}"
     dest: "{{ nagios_custom_checks_dir }}/{{ item.dest }}"
+    version: "{{ item.version | default(omit) }}"
     force: yes
-  with_items: "{{ nagios_checks_repos }}"
+  loop: "{{ nagios_checks_repos }}"
   when: nagios_checks_repos is defined
 
 # Configure various server configurtion files
